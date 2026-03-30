@@ -9,3 +9,6 @@ Users: Bike Share Companies
 Data Sources
 - https://www.kaggle.com/datasets/benhamner/sf-bay-area-bike-share
 - https://www.kaggle.com/datasets/jolasa/bay-area-bike-sharing-trips
+
+ER Diagram
+![ER Diagram](https://raw.githubusercontent.com/FPU-ThomasM/cop-3701-Public_Transportation_Ridership_Analytics_Database/refs/heads/main/finalized%20er%20diagram.png)
