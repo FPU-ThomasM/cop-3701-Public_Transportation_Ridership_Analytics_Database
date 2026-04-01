@@ -60,20 +60,27 @@ Alter TABLE Status
         references station(station_id)
     Add CONSTRAINT time
         foreign key (time)
-        references weather("Date");
+        references concatenateTimeFromDate(date_time);
+
+
 Alter Table Trip
     Add CONSTRAINT start_station_id
         foreign key (start_station_id)
         references Station(station_id)
-    Add constraint end_station_id
-        foreign key (end_station_id)
-        references Station(station_id)
-    Add constraint start_date
-        foreign key (start_date)
-        references weather("Date")
     Add constraint end_date
         foreign key (end_date)
         references weather("Date")
     Add constraint trip_bike_id
         foreign key (bike_id)
         references "User"(Bike_ID);
+
+
+create table concatenateTimeFromDate(
+    date_no_time date not null,
+    date_time date primary key
+);
+
+alter table concatenateTimeFromDate
+    add constraint time_less
+        foreign key (date_no_time)
+        references weather("Date");
