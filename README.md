@@ -10,5 +10,9 @@
 - https://www.kaggle.com/datasets/benhamner/sf-bay-area-bike-share
 - https://www.kaggle.com/datasets/jolasa/bay-area-bike-sharing-trips
 
+**Important**: 
+- unzip zip files to access data in them
+- status raw data needs to be downloaded from source as github won't allow uploading files of that size
+
 **ER Diagram**
 ![ER Diagram](https://github.com/FPU-ThomasM/cop-3701-Public_Transportation_Ridership_Analytics_Database/blob/main/finalized%20er%20diagram.png?raw=true)
