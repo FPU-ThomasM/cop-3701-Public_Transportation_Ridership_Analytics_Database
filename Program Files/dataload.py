@@ -36,7 +36,7 @@ def bulk_load_csv(file_path, userInput):
             case 2:
                 sql += "station_location (station_id, latitude, longitude, city) VALUES (:1, :2, :3, :4)"
             case 3:
-                sql += "status (status_id, station_id, time, bikes_avaialbe, docks_avaible) VALUES (:1, :2, TO_DATE(:3, 'mm/dd/yyyy hh:mi:ss'), :4, :5)"
+                sql += "status (status_id, station_id, time, bikes_available, docks_available) VALUES (:1, :2, TO_DATE(:3, 'mm/dd/yyyy hh24:mi:ss'), :4, :5)"
             case 4:
                 sql += "trip (trip_id, bike_id, duration, start_station_id, end_station_id, start_date, end_date) "
                 sql += "VALUES (:1, :2, :3, :4, :5, TO_DATE(:6, 'mm/dd/yyyy hh:mi:ss'), TO_DATE(:7, 'mm/dd/yyyy hh:mi:ss'))"
@@ -45,7 +45,7 @@ def bulk_load_csv(file_path, userInput):
             case 6:
                 sql += "weather (\"Date\", max_temp_f, min_temp_f, max_vis_miles, events) VALUES (TO_DATE(:1, 'mm/dd/yyyy'), :2, :3, :4, :5)"
             case 7:
-                sql += "concatenateTimeFromDate (date_no_time, date_time) VALUES (TO_DATE(:1, 'mm/dd/yyyy'), TO_DATE(:2, 'mm/dd/yyyy hh:mi:ss'))"
+                sql += "concatenateTimeFromDate (date_time, date_no_time) VALUES (TO_DATE(:1, 'mm/dd/yyyy hh:mi:ss'), TO_DATE(:1, 'mm/dd/yyyy'))"
             case _:
                 print ("Error: improper input given")
 
@@ -70,7 +70,7 @@ def bulk_load_csv(file_path, userInput):
 
 
 print("Which CSV do you wish to load\nstation (1)\nstation_location (2)\nstatus (3)")
-print("trip (4)\nuser (5)\nweather(6)\nall (7)")
+print("trip (4)\nuser (5)\nweather(6)\nconnect weather status (7)\n all(8)")
 
 userInput = int(input(">> "))
 
@@ -94,12 +94,13 @@ match userInput:
     case _:
         print("unknown case")
 
-if userInput != 7:
+if userInput != 8:
     bulk_load_csv(filePath, userInput)
-elif userInput == 7 :
+elif userInput == 8 :
     bulk_load_csv('clean_data/station.csv', 1)
     bulk_load_csv('clean_data/station_location.csv', 2)
+    bulk_load_csv('clean_data/user.csv', 5)
+    bulk_load_csv('clean_data/trip.csv', 4)
+    bulk_load_csv('clean_data/weather.csv', 6)
+    bulk_load_csv('clean_data/connect_Weather_Status.csv', 7)
     bulk_load_csv('clean_data/status.csv', 3)
-    bulk_load_csv('clean_trip.csv', 4)
-    bulk_load_csv('clean_user.csv', 5)
-    bulk_load_csv('clean_weather.csv', 6)

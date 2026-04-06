@@ -49,6 +49,11 @@ Create Table Trip(
     end_date date not null
 );
 
+create table concatenateTimeFromDate(
+    date_no_time date not null,
+    date_time date primary key
+);
+
 --Implement Foreign Keys
 Alter TABLE Station_location
     Add Constraint station_id
@@ -74,13 +79,9 @@ Alter Table Trip
         foreign key (bike_id)
         references "User"(Bike_ID);
 
-
-create table concatenateTimeFromDate(
-    date_no_time date not null,
-    date_time date primary key
-);
-
 alter table concatenateTimeFromDate
     add constraint time_less
         foreign key (date_no_time)
         references weather("Date");
+
+

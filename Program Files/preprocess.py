@@ -86,6 +86,7 @@ def cleanData(filePath, userInput):
             df = convertToNum('station_id', df)
             df = df.drop_duplicates(subset=['station_id'])
             df = convertToDate('time', df, True)
+
             df = convertToNum('bikes_available', df)
             df = convertToNum('docks_available', df)
         case 3:
@@ -139,7 +140,12 @@ def cleanData(filePath, userInput):
         df4 = pd.DataFrame()
         df4['date_with_time'] = df2['date_with_time'].copy()
         df4['date_without_time'] = df3['date_without_time'].copy()
+        df4 = df4.drop_duplicates()
         df4.to_csv('clean_data/connect_Weather_Status.csv', index=False)
+
+        #filter to only bike_id's in User.csv
+        dfUser = pd.read_csv('clean_data/connect_Weather_Status.csv', engine='pyarrow')
+        df = df[df['time'].isin(dfUser['date_with_time'])]
         
 
 
@@ -184,7 +190,7 @@ if userInput > 0 and userInput < 7:
 elif userInput == 7:
     cleanData('station.csv', 0)
     cleanData('station.csv', 1)
-    cleanData('status.csv', 2)
     cleanData('User.csv', 4)
     cleanData('trip.csv', 3)
     cleanData('weather.csv', 5)
+    cleanData('status.csv', 2)
